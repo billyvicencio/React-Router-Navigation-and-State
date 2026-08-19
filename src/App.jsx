@@ -1,37 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AppProvider } from './context/AppContext';
 import { Navbar } from './components/Navbar';
-import { Products } from './pages/Products';
-import { ProductDetail } from './pages/ProductDetail';
-
-const Home = () => (
-  <div className="max-w-7xl mx-auto px-4 py-24 text-center">
-    <h1 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight mb-6">
-      Design Meets <span className="text-indigo-500">Performance</span>.
-    </h1>
-    <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-      Explore ultra-responsive digital experiences engineered with modern React paradigms.
-    </p>
-  </div>
-);
+import { Home } from './pages/Home';
+import { Profile } from './pages/Profile';
+import { About } from './pages/About';
+import { NotFound } from './pages/NotFound';
 
 export default function App() {
+  // Global interaction tracker using useState
+  const [interactionCount, setInteractionCount] = useState(0);
+
+  const handleGlobalInteraction = () => {
+    setInteractionCount((prev) => prev + 1);
+  };
+
   return (
-    <AppProvider>
-      <Router>
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300 flex flex-col font-sans">
-          <Navbar />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/products/:id" element={<ProductDetail />} />
-              <Route path="*" element={<Home />} />
-            </Routes>
-          </main>
-        </div>
-      </Router>
-    </AppProvider>
+    <Router>
+      <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+        {/* Navigation Element */}
+        <Navbar interactionCount={interactionCount} />
+
+        {/* Dynamic Route Paths & Elements */}
+        <main className="flex-1">
+          <Routes>
+            {/* Page 1: Home */}
+            <Route path="/" element={<Home onInteract={handleGlobalInteraction} />} />
+
+            {/* Page 2: Profile */}
+            <Route path="/profile" element={<Profile onInteract={handleGlobalInteraction} />} />
+
+            {/* Page 3: About */}
+            <Route path="/about" element={<About />} />
+
+            {/* ERROR State Page (Catches invalid paths) */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
