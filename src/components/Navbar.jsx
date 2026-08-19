@@ -13,7 +13,7 @@ export const Navbar = ({ interactionCount }) => {
           
           <Link to="/" className="flex items-center gap-2 text-xl font-bold tracking-tight">
             <Compass className="w-6 h-6 text-indigo-500" />
-            <span>PORTFOLIO</span>
+            <span>VBilly Protfolio</span>
           </Link>
 
           <div className="flex items-center gap-8">
@@ -28,7 +28,6 @@ export const Navbar = ({ interactionCount }) => {
             </NavLink>
           </div>
 
-          {/* Event Handler Counter Badge */}
           <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-full text-xs font-mono text-indigo-300 border border-slate-700">
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
             <span>Clicks: {interactionCount}</span>
