@@ -24,7 +24,7 @@ export const Navbar = () => {
           
           <Link to="/" className="flex items-center gap-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white">
             <Compass className="w-6 h-6 text-indigo-500" />
-            <span>AETHER</span>
+            <span>VBILL</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
